@@ -15,7 +15,7 @@ For example, at Ubuntu, you could:
 
     $ sudo apt-get install osmctools python3 default-jdk p7zip-full
 
-## Steps
+## Steps by example
 
     $ git clone git@github.com:alpha-rudy/gpx-overlay.git
     $ cd gpx-overlay/
