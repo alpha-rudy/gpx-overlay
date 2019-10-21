@@ -19,7 +19,7 @@ For example, at Ubuntu, you could:
 
     $ git clone git@github.com:alpha-rudy/gpx-overlay.git
     $ cd gpx-overlay/
-    $ cp /path/to/src/Markchoo.osm /path/to/src/Happyman.osm
+    $ cp /path/to/src/Markchoo.osm /path/to/src/Happyman.osm .
     $ make
     $ ls *.map *.map.zip
     Happyman.map  Happyman.map.zip  Markchoo.map  Marchoo.map.zip
