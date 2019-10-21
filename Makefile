@@ -12,7 +12,7 @@ MAPS := $(shell ls *.osm)
 all: $(MAPS:%.osm=%.map.zip)
 
 clean:
-	git clean -fdx
+	git clean -fX
 
 .INTERMEDIATE: $(MAPS:%.osm=%.pbf)
 %.pbf: %.osm
