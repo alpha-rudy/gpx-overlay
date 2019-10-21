@@ -6,23 +6,24 @@ JAVACMD_OPTIONS := -Xmx25G -server
 MAPWITER_THREADS = 8
 TAIWAN_BBOX=21.55682,118.12141,26.44212,122.31377
 
-MAPS := $(GPX_BASE).map
+MAPS := $(shell ls *.osm)
 
 .PHONY: all clean
-all: $(MAPS:%.map=%.map.zip)
+all: $(MAPS:%.osm=%.map.zip)
 
 clean:
 	git clean -fdx
 
-.INTERMEDIATE: $(MAPS:%.map=%.pbf)
+.INTERMEDIATE: $(MAPS:%.osm=%.pbf)
 %.pbf: %.osm
 	osmconvert $< -o=$@
 
-.INTERMEDIATE: $(MAPS:%.map=%-sed.pbf)
+.INTERMEDIATE: $(MAPS:%.osm=%-sed.pbf)
 %-sed.pbf: %.pbf
 	rm -f $@
 	python3 osm_scripts/gpx_handler.py $< $@
 
+.PRECIOUS: $(MAPS:%.osm=%.map)
 %.map: %-sed.pbf osm_scripts/gpx-mapping.xml
 	export JAVACMD_OPTIONS="$(JAVACMD_OPTIONS)" && \
 	sh $(TOOLS_DIR)/osmosis/bin/osmosis \
@@ -37,7 +38,7 @@ clean:
 	    polygon-clipping=true way-clipping=true label-position=true \
 	    zoom-interval-conf=6,0,6,10,7,11,14,12,21 \
 	    map-start-zoom=12 \
-	    comment="$(VERSION) / (c) GPX Overlay Copy Right: $(notdir $(GPX_BASE))" \
+	    comment="GPX Overlay $@ v$(VERSION) / (c) Copy Right Reserved." \
 	    file="$@" > /dev/null 2> /dev/null
 
 %.map.zip: %.map
