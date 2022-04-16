@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<tag-mapping xmlns='http://mapsforge.org/tag-mapping' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='http://mapsforge.org/tag-mapping ../resources/tag-mapping.xsd' default-zoom-appear='16' profile-name='default-profile'>
+
+<ways>
+<!-- compartment -->
+<osm-tag key='boundary' value='forest_compartment' force-polygon-line='true' zoom-appear='9' />
+</ways>
+
+<pois>
+<!-- compartment -->
+<osm-tag key='place' value='compartment' zoom-appear='12' />
+</pois>
+
+</tag-mapping>
