@@ -5,6 +5,7 @@ VERSION := $(shell date +%Y.%m.%d)
 JAVACMD_OPTIONS := -Xmx25G -server
 MAPWITER_THREADS = 8
 TAIWAN_BBOX=21.55682,118.12141,26.44212,122.31377
+OSMOSIS=osmosis-0.48.3/bin/osmosis
 
 MAPS := $(shell ls *.osm)
 
@@ -26,7 +27,7 @@ clean:
 .PRECIOUS: $(MAPS:%.osm=%.map)
 %-gpx.map: %-gpx-sed.pbf osm_scripts/gpx-mapping.xml
 	export JAVACMD_OPTIONS="$(JAVACMD_OPTIONS)" && \
-	sh $(TOOLS_DIR)/osmosis/bin/osmosis \
+	sh $(TOOLS_DIR)/$(OSMOSIS) \
 	  --read-pbf $< \
 	  --buffer --mapfile-writer \
 	    type=ram \
@@ -43,7 +44,7 @@ clean:
 
 %.map: %.pbf osm_scripts/extra-mapping.xml
 	export JAVACMD_OPTIONS="$(JAVACMD_OPTIONS)" && \
-	sh $(TOOLS_DIR)/osmosis/bin/osmosis \
+	sh $(TOOLS_DIR)/$(OSMOSIS) \
 	  --read-pbf $< \
 	  --buffer --mapfile-writer \
 	    type=ram \
